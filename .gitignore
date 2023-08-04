@@ -1,3 +1,9 @@
+.*
+
+!.editorconfig
+!.eslintrc.js
+!.gitignore
+!.gitmodules
 
 d2bs/kolbot/data/secure/*.txt
 d2bs/kolbot/data/*.json
