@@ -94,18 +94,16 @@ const Equip = {
 		if (!isMe && !isMyMerc) {
 			return false;
 		}
-		let item = null;
-		for (
-			item = unit.getItem();
-			item;
-			item = item.getNext()
-		) {
+		let item = unit.getItem();
+		if (!item) {
+			return null;
+		}
+		do {
 			if (item.bodyLocation !== bodyLoc) {
 				continue;
 			}
 			return copyUnit(item);
-		}
-
+		} while (item.getNext());
 		return null;
 	},
 
