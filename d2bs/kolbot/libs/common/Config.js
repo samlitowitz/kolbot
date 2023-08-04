@@ -374,6 +374,9 @@ let Config = {
 
 	// Script specific
 	MFLeader: false,
+	EquippedStats: {
+		Stats: [],
+	},
 	Mausoleum: {
 		KillBishibosh: false,
 		KillBloodRaven: false,
