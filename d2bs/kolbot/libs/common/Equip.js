@@ -123,7 +123,7 @@ const Equip = {
 			return null;
 		}
 		do {
-			if (item.unittype !== sdk.unittype.Item) {
+			if (item.type !== sdk.unittype.Item) {
 				continue;
 			}
 			if (item.bodyLocation !== bodyLoc) {
