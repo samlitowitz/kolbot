@@ -118,7 +118,7 @@ const Equip = {
 		if (!isMe && !isMyMerc) {
 			return false;
 		}
-		let item = unit.getItem();
+		let item = unit.getItem(-1, sdk.items.mode.Equipped);
 		if (!item) {
 			return null;
 		}
