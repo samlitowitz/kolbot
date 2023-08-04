@@ -154,6 +154,7 @@ const Item = {
 	},
 
 	autoEquipCheck: function (item) {
+		return true;
 		if (!Config.AutoEquip) return true;
 
 		let tier = NTIP.GetTier(item);
@@ -176,6 +177,7 @@ const Item = {
 
 	// returns true if the item should be kept+logged, false if not
 	autoEquip: function () {
+		return true;
 		if (!Config.AutoEquip) return true;
 
 		let items = me.findItems(-1, sdk.items.mode.inStorage);
