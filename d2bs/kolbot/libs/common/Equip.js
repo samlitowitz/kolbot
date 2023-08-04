@@ -126,7 +126,7 @@ const Equip = {
 			if (item.type !== sdk.unittype.Item) {
 				continue;
 			}
-			if (item.bodyLocation !== bodyLoc) {
+			if (item.bodylocation !== bodyLoc) {
 				continue;
 			}
 			return copyUnit(item);
@@ -142,7 +142,7 @@ const Equip = {
 		if (!item.getFlag(sdk.items.flags.Runeword)) {
 			return false;
 		}
-		return item.runeword === runewordName;
+		return item.fname.indexOf(runewordName) > -1;
 	},
 
 	hasSetEquippedAt: function (unit, bodyLoc, setItemName) {
