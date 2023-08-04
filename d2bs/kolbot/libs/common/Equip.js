@@ -1,4 +1,28 @@
 const Equip = {
+	isMe: function (unit) {
+		if (!unit) {
+			return false;
+		}
+		if (unit.type !== sdk.unittype.Player) {
+			return false;
+		}
+		return unit.gid === me.gid;
+	},
+
+	isMyMerc: function (unit) {
+		if (!unit) {
+			return false;
+		}
+		if (unit.type !== sdk.unittype.NPC) {
+			return false;
+		}
+		const merc = me.getMerc();
+		if (!merc) {
+			return false;
+		}
+		return unit.gid === merc.gid;
+	},
+
 	canEquip: function (unit, item) {
 		const isMe = this.isMe(unit);
 		const isMyMerc = this.isMyMerc(unit);
@@ -84,8 +108,8 @@ const Equip = {
 				}
 				break;
 			default:
-				return false;
 		}
+		return false;
 	},
 
 	equippedAt: function (unit, bodyLoc) {
@@ -99,6 +123,9 @@ const Equip = {
 			return null;
 		}
 		do {
+			if (item.unittype !== sdk.unittype.Item) {
+				continue;
+			}
 			if (item.bodyLocation !== bodyLoc) {
 				continue;
 			}
@@ -138,29 +165,5 @@ const Equip = {
 			return false;
 		}
 		return item.name === uniqueItemName;
-	},
-
-	isMe: function (unit) {
-		if (!unit) {
-			return false;
-		}
-		if (unit.type !== sdk.unittype.Player) {
-			return false;
-		}
-		return unit.gid === me.gid;
-	},
-
-	isMyMerc: function (unit) {
-		if (!unit) {
-			return false;
-		}
-		if (unit.type !== sdk.unittype.NPC) {
-			return false;
-		}
-		const merc = me.getMerc();
-		if (!merc) {
-			return false;
-		}
-		return unit.gid === merc.gid;
 	}
 };
