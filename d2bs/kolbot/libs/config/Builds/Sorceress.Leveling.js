@@ -16,6 +16,10 @@ if (!isIncluded("common/Town.js")) {
 	include("common/Town.js");
 }
 
+require('../Shared/Config/Runewords/Insight');
+require('../Shared/Config/Runewords/SpiritSword');
+require('../Shared/Config/Runewords/SpiritMonarch');
+
 var AutoBuildTemplate = {
 	1: {
 		Update: function () {
