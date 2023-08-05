@@ -20,10 +20,6 @@ if (!isIncluded('common/Equip.js')) {
 		return;
 	}
 
-	const fnGetSpiritSwordFCR = function () {
-
-	};
-
 	let leftFCR = null;
 	if (hasSpiritLeft) {
 		const leftEquip = Equip.equippedAt(me, sdk.body.LeftArm);
