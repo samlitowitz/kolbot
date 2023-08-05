@@ -1,5 +1,8 @@
 js_strict(true);
 
+if (typeof sdk === 'undefined') {
+	var sdk = require('../../modules/sdk');
+}
 if (!isIncluded("common/Cubing.js")) {
 	include("common/Cubing.js");
 }
@@ -11,9 +14,6 @@ if (!isIncluded("common/Runewords.js")) {
 }
 if (!isIncluded("common/Town.js")) {
 	include("common/Town.js");
-}
-if (typeof sdk === 'undefined') {
-	var sdk = require('../../modules/sdk');
 }
 
 var AutoBuildTemplate = {
