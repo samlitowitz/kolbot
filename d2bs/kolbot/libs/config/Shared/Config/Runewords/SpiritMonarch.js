@@ -25,7 +25,7 @@ if (!isIncluded('common/Equip.js')) {
 			let leftFCR = null;
 			if (hasSpiritLeft) {
 				const leftEquip = Equip.equippedAt(me, sdk.body.LeftArm);
-				if (leftEquip !== null && leftEquip.itemtype === sdk.items.type.Shield) {
+				if (leftEquip !== null && leftEquip.itemType === sdk.items.type.Shield) {
 					leftFCR = leftEquip.getStatEx(sdk.stats.FCR);
 				}
 
@@ -33,7 +33,7 @@ if (!isIncluded('common/Equip.js')) {
 			let rightFCR = null;
 			if (hasSpiritRight) {
 				const rightEquip = Equip.equippedAt(me, sdk.body.RightArm);
-				if (rightEquip !== null && rightEquip.itemtype === sdk.items.type.Shield) {
+				if (rightEquip !== null && rightEquip.itemType === sdk.items.type.Shield) {
 					rightFCR = rightEquip.getStatEx(sdk.stats.FCR);
 				}
 			}
