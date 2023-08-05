@@ -1,5 +1,7 @@
 js_strict(true);
 
+const noop = function() {};
+
 if (typeof sdk === 'undefined') {
 	var sdk = require('../../modules/sdk');
 }
@@ -16,6 +18,9 @@ if (!isIncluded("common/Town.js")) {
 	include("common/Town.js");
 }
 
+if (typeof Infinity === 'undefined') {
+	var Infinity = require('../Shared/Config/Runewords/Infinity');
+}
 if (typeof Insight === 'undefined') {
 	var Insight = require('../Shared/Config/Runewords/Insight');
 }
@@ -25,6 +30,8 @@ if (typeof SpiritSword === 'undefined') {
 if (typeof SpiritMonarch === 'undefined') {
 	var SpiritMonarch = require('../Shared/Config/Runewords/SpiritMonarch');
 }
+
+Infinity.RollAndKeep() ? noop() : Insight.RollAndKeep();
 
 SpiritSword.RollAndKeep();
 SpiritMonarch.RollAndKeep();
