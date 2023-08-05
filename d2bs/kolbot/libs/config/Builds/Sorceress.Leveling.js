@@ -16,9 +16,18 @@ if (!isIncluded("common/Town.js")) {
 	include("common/Town.js");
 }
 
-require('../Shared/Config/Runewords/Insight');
-require('../Shared/Config/Runewords/SpiritSword');
-require('../Shared/Config/Runewords/SpiritMonarch');
+if (typeof Insight === 'undefined') {
+	var Insight = require('../Shared/Config/Runewords/Insight');
+}
+if (typeof SpiritSword === 'undefined') {
+	var SpiritSword = require('../Shared/Config/Runewords/SpiritSword');
+}
+if (typeof SpiritMonarch === 'undefined') {
+	var SpiritMonarch = require('../Shared/Config/Runewords/SpiritMonarch');
+}
+
+SpiritSword.RollAndKeep();
+SpiritMonarch.RollAndKeep();
 
 var AutoBuildTemplate = {
 	1: {
