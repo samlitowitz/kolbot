@@ -8,8 +8,8 @@ if (!isIncluded('common/Equip.js')) {
 }
 
 
-(function () {
-	return {
+(function (module) {
+	module.exports = {
 		RollAndKeep: function () {
 			const hasSpiritLeft = Equip.hasRunewordEquippedAt(me, sdk.body.LeftArm, "Spirit");
 			const hasSpiritRight = Equip.hasRunewordEquippedAt(me, sdk.body.RightArm, "Spirit");
@@ -71,4 +71,4 @@ if (!isIncluded('common/Equip.js')) {
 			return true;
 		}
 	};
-})();
+})(module);

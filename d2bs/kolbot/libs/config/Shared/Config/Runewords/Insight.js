@@ -8,8 +8,8 @@ if (!isIncluded('common/Equip.js')) {
 }
 
 
-(function () {
-	return {
+(function (module) {
+	module.exports = {
 		RollAndKeep: function () {
 			const merc = me.getMerc();
 			const hasInsight = Equip.hasRunewordEquippedAt(merc, sdk.body.LeftArm, "Insight");
@@ -37,4 +37,4 @@ if (!isIncluded('common/Equip.js')) {
 			return true;
 		}
 	};
-})();
+})(module);
