@@ -10,6 +10,32 @@ if (!isIncluded('common/Equip.js')) {
 
 (function (module) {
 	module.exports = {
+		MissingOrShouldUpgrade: function () {
+			const hasSpiritLeft = Equip.hasRunewordEquippedAt(me, sdk.body.LeftArm, "Spirit");
+			const hasSpiritRight = Equip.hasRunewordEquippedAt(me, sdk.body.RightArm, "Spirit");
+			const hasSpirit = hasSpiritLeft || hasSpiritRight;
+			if (!hasSpirit) {
+				return true;
+			}
+			if (hasSpiritLeft) {
+				const leftEquip = Equip.equippedAt(me, sdk.body.LeftArm);
+				if (leftEquip !== null && leftEquip.itemType === sdk.items.type.Shield) {
+					if (leftEquip.getStatEx(sdk.stats.FCR) < 35) {
+						return true;
+					}
+				}
+
+			}
+			if (hasSpiritRight) {
+				const rightEquip = Equip.equippedAt(me, sdk.body.RightArm);
+				if (rightEquip !== null && rightEquip.itemType === sdk.items.type.Shield) {
+					if (rightEquip.getStatEx(sdk.stats.FCR) < 35) {
+						return true;
+					}
+				}
+			}
+			return false;
+		},
 		RollAndKeep: function () {
 			const hasSpiritLeft = Equip.hasRunewordEquippedAt(me, sdk.body.LeftArm, "Spirit");
 			const hasSpiritRight = Equip.hasRunewordEquippedAt(me, sdk.body.RightArm, "Spirit");

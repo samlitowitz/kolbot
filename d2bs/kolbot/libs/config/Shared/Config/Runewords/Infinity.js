@@ -10,6 +10,11 @@ if (!isIncluded('common/Equip.js')) {
 
 (function (module) {
 	module.exports = {
+		MissingOrShouldUpgrade: function() {
+			const merc = me.getMerc();
+			const hasInfinity = Equip.hasRunewordEquippedAt(merc, sdk.body.LeftArm, "Infinity");
+			return !hasInfinity;
+		},
 		RollAndKeep: function () {
 			const merc = me.getMerc();
 			const hasInfinity = Equip.hasRunewordEquippedAt(merc, sdk.body.LeftArm, "Infinity");
@@ -20,7 +25,7 @@ if (!isIncluded('common/Equip.js')) {
 
 			Config.Recipes.push([Recipe.Socket.Weapon, "giantthresher", Roll.All]);
 			Config.Recipes.push([Recipe.Socket.Weapon, "thresher", Roll.All]);
-			Config.KeepRunewords.push("[type] == polearm && [class] == elite && [flag] == runeword && [flag] == ethereal # [meditationaura] >= 12");
+			Config.KeepRunewords.push("[type] == polearm && [class] == elite && [flag] == runeword && [flag] == ethereal # [convictionaura] == 12");
 			return true;
 		}
 	};

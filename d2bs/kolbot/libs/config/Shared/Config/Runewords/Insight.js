@@ -10,6 +10,19 @@ if (!isIncluded('common/Equip.js')) {
 
 (function (module) {
 	module.exports = {
+		MissingOrShouldUpgrade: function() {
+			const merc = me.getMerc();
+			const hasInsight = Equip.hasRunewordEquippedAt(merc, sdk.body.LeftArm, "Insight");
+			if (!hasInsight) {
+				return true;
+			}
+			const mercWeapon = Equip.equippedAt(merc, sdk.body.LeftArm);
+			const hasEliteInsight = mercWeapon.itemclass === sdk.class.Elite,
+				hasEtherealInsight = mercWeapon.getFlag(sdk.items.flags.Ethereal)
+			;
+
+			return !hasEliteInsight || !hasEtherealInsight;
+		},
 		RollAndKeep: function () {
 			const merc = me.getMerc();
 			const hasInsight = Equip.hasRunewordEquippedAt(merc, sdk.body.LeftArm, "Insight");
