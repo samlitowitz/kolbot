@@ -31,10 +31,18 @@ if (typeof SpiritMonarch === 'undefined') {
 	var SpiritMonarch = require('../Shared/Config/Runewords/SpiritMonarch');
 }
 
-RWInfinity.RollAndKeep() ? noop() : Insight.RollAndKeep();
+RWInfinity.MissingOrShouldUpgrade() ? RWInfinity.RollAndKeep() : noop();
 
-SpiritSword.RollAndKeep();
-SpiritMonarch.RollAndKeep();
+if (
+	RWInfinity.MissingOrShouldUpgrade()
+	&& Insight.MissingOrShouldUpgrade()
+) {
+	RWInfinity.RollAndKeep();
+	Insight.RollAndKeep();
+}
+
+SpiritSword.MissingOrShouldUpgrade() ? SpiritSword.RollAndKeep() : noop();
+SpiritMonarch.MissingOrShouldUpgrade() ? SpiritMonarch.RollAndKeep() : noop();
 
 var AutoBuildTemplate = {
 	1: {
