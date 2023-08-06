@@ -18,6 +18,9 @@ if (!isIncluded("common/Town.js")) {
 	include("common/Town.js");
 }
 
+if (typeof AncientsPledge === 'undefined') {
+	var AncientsPledge = require('../Shared/Config/Runewords/AncientsPledge');
+}
 if (typeof RWInfinity === 'undefined') {
 	var RWInfinity = require('../Shared/Config/Runewords/Infinity');
 }
@@ -42,7 +45,15 @@ if (
 }
 
 SpiritSword.MissingOrShouldUpgrade() ? SpiritSword.RollAndKeep() : noop();
+
 SpiritMonarch.MissingOrShouldUpgrade() ? SpiritMonarch.RollAndKeep() : noop();
+if (
+	SpiritMonarch.MissingOrShouldUpgrade()
+	&& AncientsPledge.MissingOrShouldUpgrade()
+) {
+	SpiritMonarch.RollAndKeep();
+	AncientsPledge.RollAndKeep();
+}
 
 var AutoBuildTemplate = {
 	1: {
