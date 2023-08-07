@@ -19,9 +19,13 @@ if (typeof SpiritSword === 'undefined') {
 if (typeof SpiritMonarch === 'undefined') {
 	var SpiritMonarch = require('Runewords/SpiritMonarch');
 }
+if (typeof Treachery === 'undefined') {
+	var Treachery = require('Runewords/Treachery');
+}
 
 const MercArmor = [
-	Fortitude
+	Fortitude,
+	Treachery
 ];
 
 const MercWeapons = [
