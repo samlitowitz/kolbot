@@ -18,7 +18,7 @@ if (!isIncluded("common/Town.js")) {
 	include("common/Town.js");
 }
 
-require('Shared/Config/Sorceress.Blizzard.DynamicPickIt');
+require('../Shared/Config/Sorceress.Blizzard.DynamicPickIt');
 
 var AutoBuildTemplate = {
 	1: {

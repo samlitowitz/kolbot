@@ -16,11 +16,15 @@ if (!isIncluded('common/Equip.js')) {
 		],
 		Name: 'Ancients Pledge',
 		Missing: function () {
-			let found = false;
-			this.BodyLocs.forEach((loc) => {
-				found ||= Equip.hasRunewordEquippedAt(me, loc, 'Ancients Pledge');
-			});
-			return found;
+			let i, loc;
+			for (i = 0; i < this.BodyLocs.length; i++) {
+				loc = this.BodyLocs[i];
+				if (!Equip.hasRunewordEquippedAt(me, loc, 'Ancients Pledge')) {
+					continue;
+				}
+				return true;
+			}
+			return false;
 		},
 		ShouldUpgrade: function () {
 			return this.Missing();

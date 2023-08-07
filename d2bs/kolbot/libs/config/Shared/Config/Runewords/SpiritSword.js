@@ -16,11 +16,8 @@ if (!isIncluded('common/Equip.js')) {
 		],
 		Name: 'Spirit Sword',
 		Missing: function () {
-			let found = false;
-			this.BodyLocs.forEach((loc) => {
-				found ||= Equip.hasRunewordEquippedAt(me, loc, "Spirit");
-			});
-			return found;
+			const minFCR = this.GetMinFCR();
+			return minFCR === null;
 		},
 		ShouldUpgrade: function () {
 			if (this.Missing()) {
@@ -69,9 +66,6 @@ if (!isIncluded('common/Equip.js')) {
 					continue;
 				}
 				if (item.itemType !== sdk.items.type.Sword) {
-					continue;
-				}
-				if (item.getStatEx(sdk.stats.FCR) >= 35) {
 					continue;
 				}
 				if (minFCR === null) {
