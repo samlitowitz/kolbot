@@ -1,6 +1,9 @@
 if (typeof AncientsPledge === 'undefined') {
 	var AncientsPledge = require('Runewords/AncientsPledge');
 }
+if (typeof Fortitude === 'undefined') {
+	var Fortitude = require('Runewords/Fortitude');
+}
 if (typeof RWInfinity === 'undefined') {
 	var RWInfinity = require('Runewords/Infinity');
 }
@@ -17,6 +20,10 @@ if (typeof SpiritMonarch === 'undefined') {
 	var SpiritMonarch = require('Runewords/SpiritMonarch');
 }
 
+const MercArmor = [
+	Fortitude
+];
+
 const MercWeapons = [
 	Insight
 ];
@@ -32,6 +39,7 @@ const Weapons = [
 ];
 
 (function () {
+	fnPrioritize(MercArmor);
 	fnPrioritize(MercWeapons);
 	fnPrioritize(Shields);
 	fnPrioritize(Weapons);
