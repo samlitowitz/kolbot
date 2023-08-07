@@ -10,18 +10,26 @@ if (!isIncluded('common/Equip.js')) {
 
 (function (module) {
 	module.exports = {
+		BodyLocs: [
+			sdk.body.LeftArm,
+			sdk.body.RightArm
+		],
+		Name: 'Ancients Pledge',
+		Missing: function () {
+			let found = false;
+			this.BodyLocs.forEach((loc) => {
+				found ||= Equip.hasRunewordEquippedAt(me, loc, 'Ancients Pledge');
+			});
+			return found;
+		},
+		ShouldUpgrade: function () {
+			return this.Missing();
+		},
 		MissingOrShouldUpgrade: function () {
-			const hasAncientsPledgeLeft = Equip.hasRunewordEquippedAt(me, sdk.body.LeftArm, "Ancients Pledge");
-			const hasAncientsPledgeRight = Equip.hasRunewordEquippedAt(me, sdk.body.RightArm, "Ancients Pledge");
-			const hasAncientsPledge = hasAncientsPledgeLeft || hasAncientsPledgeRight;
-			return !hasAncientsPledge;
+			return this.Missing() || this.ShouldUpgrade();
 		},
 		RollAndKeep: function () {
-			const hasAncientsPledgeLeft = Equip.hasRunewordEquippedAt(me, sdk.body.LeftArm, "Ancients Pledge");
-			const hasAncientsPledgeRight = Equip.hasRunewordEquippedAt(me, sdk.body.RightArm, "Ancients Pledge");
-			const hasAncientsPledge = hasAncientsPledgeLeft || hasAncientsPledgeRight;
-
-			if (hasAncientsPledge) {
+			if (!this.MissingOrShouldUpgrade()) {
 				return false;
 			}
 			Config.Recipes.push([Recipe.Socket.Weapon, "kiteshield", Roll.NonEth]);

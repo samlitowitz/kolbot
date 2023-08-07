@@ -20,10 +20,10 @@ if (!isIncluded('common/Equip.js')) {
 			return this.Missing();
 		},
 		MissingOrShouldUpgrade: function () {
-			return this.Missing();
+			return this.Missing() || this.ShouldUpgrade();
 		},
 		RollAndKeep: function () {
-			if (!this.Missing()) {
+			if (!this.MissingOrShouldUpgrade()) {
 				return false;
 			}
 

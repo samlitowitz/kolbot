@@ -18,42 +18,7 @@ if (!isIncluded("common/Town.js")) {
 	include("common/Town.js");
 }
 
-if (typeof AncientsPledge === 'undefined') {
-	var AncientsPledge = require('../Shared/Config/Runewords/AncientsPledge');
-}
-if (typeof RWInfinity === 'undefined') {
-	var RWInfinity = require('../Shared/Config/Runewords/Infinity');
-}
-if (typeof Insight === 'undefined') {
-	var Insight = require('../Shared/Config/Runewords/Insight');
-}
-if (typeof SpiritSword === 'undefined') {
-	var SpiritSword = require('../Shared/Config/Runewords/SpiritSword');
-}
-if (typeof SpiritMonarch === 'undefined') {
-	var SpiritMonarch = require('../Shared/Config/Runewords/SpiritMonarch');
-}
-
-RWInfinity.MissingOrShouldUpgrade() ? RWInfinity.RollAndKeep() : noop();
-
-if (
-	RWInfinity.MissingOrShouldUpgrade()
-	&& Insight.MissingOrShouldUpgrade()
-) {
-	RWInfinity.RollAndKeep();
-	Insight.RollAndKeep();
-}
-
-SpiritSword.MissingOrShouldUpgrade() ? SpiritSword.RollAndKeep() : noop();
-
-SpiritMonarch.MissingOrShouldUpgrade() ? SpiritMonarch.RollAndKeep() : noop();
-if (
-	SpiritMonarch.MissingOrShouldUpgrade()
-	&& AncientsPledge.MissingOrShouldUpgrade()
-) {
-	SpiritMonarch.RollAndKeep();
-	AncientsPledge.RollAndKeep();
-}
+require('Shared/Config/Sorceress.Blizzard.DynamicPickIt');
 
 var AutoBuildTemplate = {
 	1: {
