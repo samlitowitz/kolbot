@@ -29,7 +29,7 @@ if (!isIncluded('common/Equip.js')) {
 
 			Config.Recipes.push([Recipe.Socket.Weapon, 'giantthresher', Roll.All]);
 			Config.Recipes.push([Recipe.Socket.Weapon, 'thresher', Roll.All]);
-			Config.KeepRunewords.push('[type] == polearm && [class] == elite && [flag] == runeword && [flag] == ethereal # [convictionaura] =	= 12');
+			Config.KeepRunewords.push('[type] == polearm && [class] == elite && [flag] == runeword && [flag] == ethereal # [convictionaura] == 12');
 			return true;
 		}
 	};
