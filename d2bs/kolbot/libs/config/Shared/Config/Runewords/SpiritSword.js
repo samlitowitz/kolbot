@@ -38,9 +38,9 @@ if (!isIncluded('common/Equip.js')) {
 				return false;
 			}
 			if (missing) {
-				Config.Recipes.push([Recipe.Socket.Weapon, "broadsword", Roll.NonEth]);
-				Config.Recipes.push([Recipe.Socket.Weapon, "crystalsword", Roll.NonEth]);
-				Config.KeepRunewords.push("[type] == sword && [class] == normal && [flag] == runeword # [itemallskills] == 2 && [fcr] >= 25");
+				Config.Recipes.push([Recipe.Socket.Weapon, 'broadsword', Roll.NonEth]);
+				Config.Recipes.push([Recipe.Socket.Weapon, 'crystalsword', Roll.NonEth]);
+				Config.KeepRunewords.push('[type] == sword && [class] == normal && [flag] == runeword # [itemallskills] == 2 && [fcr] >= 25');
 				return true;
 			}
 
@@ -49,16 +49,16 @@ if (!isIncluded('common/Equip.js')) {
 				return false;
 			}
 
-			Config.Recipes.push([Recipe.Socket.Weapon, "broadsword", Roll.NonEth]);
-			Config.Recipes.push([Recipe.Socket.Weapon, "crystalsword", Roll.NonEth]);
-			Config.KeepRunewords.push("[type] == sword && [class] == normal && [flag] == runeword # [itemallskills] == 2 && [fcr] > " + minFCR);
+			Config.Recipes.push([Recipe.Socket.Weapon, 'broadsword', Roll.NonEth]);
+			Config.Recipes.push([Recipe.Socket.Weapon, 'crystalsword', Roll.NonEth]);
+			Config.KeepRunewords.push('[type] == sword && [class] == normal && [flag] == runeword # [itemallskills] == 2 && [fcr] > ' + minFCR);
 			return true;
 		},
 		GetMinFCR: function () {
 			let i, minFCR = null, loc, item;
 			for (i = 0; i < this.BodyLocs.length; i++) {
 				loc = this.BodyLocs[i];
-				if (!Equip.hasRunewordEquippedAt(me, loc, "Spirit")) {
+				if (!Equip.hasRunewordEquippedAt(me, loc, 'Spirit')) {
 					continue;
 				}
 				item = Equip.equippedAt(loc);

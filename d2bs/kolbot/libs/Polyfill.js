@@ -68,6 +68,18 @@ String.prototype.capitalize = function (downcase = false) {
 	return this.charAt(0).toUpperCase() + (downcase ? this.slice(1).toLowerCase() : this.slice(1));
 };
 
+if (!String.prototype.format) {
+	String.prototype.format = function() {
+		var args = arguments;
+		return this.replace(/{(\d+)}/g, function(match, number) {
+			return typeof args[number] != 'undefined'
+				? args[number]
+				: match
+				;
+		});
+	};
+}
+
 Array.prototype.isEqual = function (t) {
 	return this.map((x, i) => t.hasOwnProperty(i) && x === t[i]).reduce((a, c) => c & a, true);
 };
@@ -164,8 +176,8 @@ if (!String.isEqual) {
 	/**
 	 * Check if two strings are equal
 	 * @static
-	 * @param {string} str1 
-	 * @param {string} str2 
+	 * @param {string} str1
+	 * @param {string} str2
 	 * @returns {boolean}
 	 */
 	String.isEqual = function (str1, str2) {
@@ -604,7 +616,7 @@ if (!Object.entries) {
 
 		console.error = function (error = "") {
 			let msg, source;
-			
+
 			if (typeof error === "string") {
 				msg = error;
 			} else {
