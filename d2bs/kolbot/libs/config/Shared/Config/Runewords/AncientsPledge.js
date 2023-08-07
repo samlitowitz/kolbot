@@ -39,6 +39,7 @@ if (!isIncluded('common/Equip.js')) {
 			Config.Recipes.push([Recipe.Socket.Weapon, "kiteshield", Roll.NonEth]);
 			Config.Recipes.push([Recipe.Socket.Weapon, "largeshield", Roll.NonEth]);
 			Config.KeepRunewords.push("[type] == shield && [class] == normal && [flag] == runeword # [coldresist] == 43 && [fireresist] == 48 && [lightresist] == 48");
+			return true;
 		}
 	}
 })(module);
