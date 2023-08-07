@@ -13,8 +13,8 @@ if (!isIncluded('common/Equip.js')) {
 		Name: 'Fortitude',
 		Missing: function () {
 			const merc = me.getMerc();
-			const hasInfinity = Equip.hasRunewordEquippedAt(merc, sdk.body.Armor, 'Fortitude');
-			return !hasInfinity;
+			const hasFortitude = Equip.hasRunewordEquippedAt(merc, sdk.body.Armor, 'Fortitude');
+			return !hasFortitude;
 		},
 		ShouldUpgrade: function () {
 			return this.Missing();
