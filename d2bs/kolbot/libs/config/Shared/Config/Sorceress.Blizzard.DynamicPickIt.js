@@ -7,6 +7,9 @@ if (typeof RWInfinity === 'undefined') {
 if (typeof Insight === 'undefined') {
 	var Insight = require('Runewords/Insight');
 }
+if (typeof Rhyme === 'undefined') {
+	var Rhyme = require('Runewords/Rhyme');
+}
 if (typeof SpiritSword === 'undefined') {
 	var SpiritSword = require('Runewords/SpiritSword');
 }
@@ -20,6 +23,7 @@ const MercWeapons = [
 
 const Shields = [
 	SpiritMonarch,
+	Rhyme,
 	AncientsPledge
 ];
 
