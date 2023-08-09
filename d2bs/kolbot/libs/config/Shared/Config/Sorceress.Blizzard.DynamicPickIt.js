@@ -50,7 +50,7 @@ const Weapons = [
 })();
 
 let fnPrint = function (name, message) {
-	print("[" + name + "]: " + message);
+	console.info("[" + name + "]: " + message);
 };
 
 let fnPrioritize = function (options) {
