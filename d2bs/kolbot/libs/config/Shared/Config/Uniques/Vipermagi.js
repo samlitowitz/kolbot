@@ -59,9 +59,6 @@ if (!isIncluded('common/Equip.js')) {
 				if (item === null) {
 					continue;
 				}
-				if (item.itemType !== sdk.items.type.Armor) {
-					continue;
-				}
 				if (maxAllRes === null) {
 					maxAllRes = item.getStatEx(sdk.stats.AllRes);
 					continue;
