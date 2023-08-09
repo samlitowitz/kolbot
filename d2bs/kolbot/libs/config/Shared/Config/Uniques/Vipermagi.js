@@ -14,7 +14,7 @@ if (!isIncluded('common/Equip.js')) {
 			sdk.body.Armor
 		],
 		Name: 'Vipermagi',
-		Missing: function () {
+		missing: function () {
 			let i, loc;
 			for (i = 0; i < this.BodyLocs.length; i++) {
 				loc = this.BodyLocs[i];
@@ -25,18 +25,18 @@ if (!isIncluded('common/Equip.js')) {
 			}
 			return false;
 		},
-		ShouldUpgrade: function () {
-			if (this.Missing()) {
+	shouldUpgrade: function () {
+			if (this.missing()) {
 				return true;
 			}
 			const allRes = this.GetAllRes();
 			return allRes !== null && allRes < 35;
 		},
-		MissingOrShouldUpgrade: function () {
-			return this.Missing() || this.ShouldUpgrade();
+		missingOrShouldUpgrade: function () {
+			return this.missing() || this.shouldUpgrade();
 		},
-		RollAndKeep: function () {
-			if (!this.MissingOrShouldUpgrade()) {
+		rollAndKeep: function () {
+			if (!this.missingOrShouldUpgrade()) {
 				return false;
 			}
 			const allRes = this.GetAllRes();

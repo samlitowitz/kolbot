@@ -10,13 +10,13 @@ if (!isIncluded('common/Equip.js')) {
 
 (function (module) {
 	module.exports = {
-		Missing: function() {
+		missing: function () {
 			const merc = me.getMerc();
 			const hasInsight = Equip.hasRunewordEquippedAt(merc, sdk.body.LeftArm, 'Insight');
 			return !hasInsight;
 		},
-		ShouldUpgrade: function () {
-			if (this.Missing()) {
+		shouldUpgrade: function () {
+			if (this.missing()) {
 				return true;
 			}
 			const merc = me.getMerc();
@@ -27,12 +27,12 @@ if (!isIncluded('common/Equip.js')) {
 
 			return !hasEliteInsight || !hasEtherealInsight;
 		},
-		MissingOrShouldUpgrade: function() {
-			return this.Missing() || this.ShouldUpgrade();
+		missingOrShouldUpgrade: function () {
+			return this.missing() || this.shouldUpgrade();
 		},
-		RollAndKeep: function () {
-			const missing = this.Missing(),
-				upgrade = this.ShouldUpgrade()
+		rollAndKeep: function () {
+			const missing = this.missing(),
+				upgrade = this.shouldUpgrade()
 			;
 			if (!missing && !upgrade) {
 				return false;

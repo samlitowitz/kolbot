@@ -82,17 +82,17 @@ let fnPrioritize = function (options) {
 			fnPrint(opt.Name, '`RollAndKeep` not found');
 			continue;
 		}
-		if (!opt.MissingOrShouldUpgrade()) {
+		if (!opt.missingOrShouldUpgrade()) {
 			fnPrint(opt.Name, 'STOP: not missing and should not be upgraded')
 			return;
 		}
-		if (!opt.Missing() && opt.ShouldUpgrade()) {
+		if (!opt.missing() && opt.shouldUpgrade()) {
 			fnPrint(opt.Name, 'STOP: not missing and should upgrade');
-			opt.RollAndKeep();
+			opt.rollAndKeep();
 			return;
 		}
 		fnPrint(opt.Name, 'roll and keep');
-		opt.RollAndKeep();
+		opt.rollAndKeep();
 	}
 };
 

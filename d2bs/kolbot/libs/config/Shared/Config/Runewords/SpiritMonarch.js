@@ -9,30 +9,33 @@ if (!isIncluded('common/Equip.js')) {
 
 
 (function (module) {
+	// TODO: Export the following functions instead...
+	// TODO: `pickIt` function to check conditions and push Config.Recipes and Config.KeepRunewords
+	// TODO:
 	module.exports = {
 		BodyLocs: [
 			sdk.body.LeftArm,
 			sdk.body.RightArm
 		],
 		Name: 'Spirit Monarch',
-		Missing: function () {
-			const minFCR = this.GetMinFCR();
+		missing: function () {
+			const minFCR = this.getMinFCR();
 			return minFCR === null;
 		},
-		ShouldUpgrade: function () {
-			if (this.Missing()) {
+		shouldUpgrade: function () {
+			if (this.missing()) {
 				return true;
 			}
 
-			const minFCR = this.GetMinFCR();
+			const minFCR = this.getMinFCR();
 			return minFCR !== null && minFCR < 35;
 		},
-		MissingOrShouldUpgrade: function () {
-			return this.Missing() || this.ShouldUpgrade();
+		missingOrShouldUpgrade: function () {
+			return this.missing() || this.shouldUpgrade();
 		},
-		RollAndKeep: function () {
-			const missing = this.Missing(),
-				upgrade = this.ShouldUpgrade()
+		rollAndKeep: function () {
+			const missing = this.missing(),
+				upgrade = this.shouldUpgrade()
 			;
 			if (!missing && !upgrade) {
 				return false;
@@ -44,7 +47,7 @@ if (!isIncluded('common/Equip.js')) {
 				return true;
 			}
 
-			const minFCR = this.GetMinFCR();
+			const minFCR = this.getMinFCR();
 			if (minFCR === null) {
 				return false;
 			}
@@ -54,7 +57,7 @@ if (!isIncluded('common/Equip.js')) {
 			Config.KeepRunewords.push('[type] == sword && [class] == normal && [flag] == runeword # [itemallskills] == 2 && [fcr] > ' + minFCR);
 			return true;
 		},
-		GetMinFCR: function () {
+		getMinFCR: function () {
 			let i, minFCR = null, loc, item;
 			for (i = 0; i < this.BodyLocs.length; i++) {
 				loc = this.BodyLocs[i];

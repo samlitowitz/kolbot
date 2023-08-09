@@ -15,7 +15,7 @@ if (!isIncluded('common/Equip.js')) {
 			sdk.body.RightArm
 		],
 		Name: 'Rhyme',
-		Missing: function () {
+		missing: function () {
 			let i, loc;
 			for (i = 0; i < this.BodyLocs.length; i++) {
 				loc = this.BodyLocs[i];
@@ -26,14 +26,14 @@ if (!isIncluded('common/Equip.js')) {
 			}
 			return false;
 		},
-		ShouldUpgrade: function () {
-			return this.Missing();
+		shouldUpgrade: function () {
+			return this.missing();
 		},
-		MissingOrShouldUpgrade: function () {
-			return this.Missing() || this.ShouldUpgrade();
+		missingOrShouldUpgrade: function () {
+			return this.missing() || this.shouldUpgrade();
 		},
-		RollAndKeep: function () {
-			if (!this.MissingOrShouldUpgrade()) {
+		rollAndKeep: function () {
+			if (!this.missingOrShouldUpgrade()) {
 				return false;
 			}
 			Config.Recipes.push([Recipe.Socket.Weapon, "kiteshield", Roll.NonEth]);

@@ -14,13 +14,13 @@ if (!isIncluded('common/Equip.js')) {
 			sdk.body.Belt
 		],
 		Name: 'Tal Rasha\'s Fine Spun Cloth',
-		FarmScripts: function() {
+		farmScripts: function () {
 			return [
 				'Mephisto',
 				'Andariel'
 			];
 		},
-		Missing: function () {
+		missing: function () {
 			let i, loc;
 			for (i = 0; i < this.BodyLocs.length; i++) {
 				loc = this.BodyLocs[i];
@@ -31,21 +31,21 @@ if (!isIncluded('common/Equip.js')) {
 			}
 			return false;
 		},
-		ShouldUpgrade: function () {
-			if (this.Missing()) {
+		shouldUpgrade: function () {
+			if (this.missing()) {
 				return true;
 			}
-			const mf = this.GetMF();
+			const mf = this.getMF();
 			return mf !== null && mf < 15;
 		},
-		MissingOrShouldUpgrade: function () {
-			return this.Missing() || this.ShouldUpgrade();
+		missingOrShouldUpgrade: function () {
+			return this.missing() || this.shouldUpgrade();
 		},
-		RollAndKeep: function () {
-			if (!this.MissingOrShouldUpgrade()) {
+		rollAndKeep: function () {
+			if (!this.missingOrShouldUpgrade()) {
 				return false;
 			}
-			const mf = this.GetMF();
+			const mf = this.getMF();
 			if (mf === null) {
 				return false;
 			}
@@ -54,7 +54,7 @@ if (!isIncluded('common/Equip.js')) {
 			);
 			return true;
 		},
-		GetMF: function() {
+		getMF: function () {
 			let i, maxMF = null, loc, item;
 			for (i = 0; i < this.BodyLocs.length; i++) {
 				loc = this.BodyLocs[i];

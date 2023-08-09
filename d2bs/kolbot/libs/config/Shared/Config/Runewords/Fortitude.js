@@ -11,19 +11,19 @@ if (!isIncluded('common/Equip.js')) {
 (function (module) {
 	module.exports = {
 		Name: 'Fortitude',
-		Missing: function () {
+		missing: function () {
 			const merc = me.getMerc();
 			const hasFortitude = Equip.hasRunewordEquippedAt(merc, sdk.body.Armor, 'Fortitude');
 			return !hasFortitude;
 		},
-		ShouldUpgrade: function () {
-			return this.Missing();
+		shouldUpgrade: function () {
+			return this.missing();
 		},
-		MissingOrShouldUpgrade: function () {
-			return this.Missing() || this.ShouldUpgrade();
+		missingOrShouldUpgrade: function () {
+			return this.missing() || this.shouldUpgrade();
 		},
-		RollAndKeep: function () {
-			if (!this.MissingOrShouldUpgrade()) {
+		rollAndKeep: function () {
+			if (!this.missingOrShouldUpgrade()) {
 				return false;
 			}
 

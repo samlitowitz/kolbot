@@ -15,13 +15,13 @@ if (!isIncluded('common/Equip.js')) {
 			sdk.body.RightArm
 		],
 		Name: 'Tal Rasha\'s Lidless Eye',
-		FarmScripts: function () {
+		farmScripts: function () {
 			return [
 				'Mephisto',
 				'Andariel'
 			];
 		},
-		Missing: function () {
+		missing: function () {
 			let i, loc;
 			for (i = 0; i < this.BodyLocs.length; i++) {
 				loc = this.BodyLocs[i];
@@ -32,21 +32,21 @@ if (!isIncluded('common/Equip.js')) {
 			}
 			return false;
 		},
-		ShouldUpgrade: function () {
-			if (this.Missing()) {
+		shouldUpgrade: function () {
+			if (this.missing()) {
 				return true;
 			}
 			return false;
 		},
-		MissingOrShouldUpgrade: function () {
-			return this.Missing() || this.ShouldUpgrade();
+		missingOrShouldUpgrade: function () {
+			return this.missing() || this.shouldUpgrade();
 		},
-		RollAndKeep: function () {
-			if (!this.MissingOrShouldUpgrade()) {
+		rollAndKeep: function () {
+			if (!this.missingOrShouldUpgrade()) {
 				return false;
 			}
-			const coldMastery = this.GetMaxColdMastery(),
-				lightningMastery = this.GetMaxLightningMastery()
+			const coldMastery = this.getMaxColdMastery(),
+				lightningMastery = this.getMaxLightningMastery()
 			;
 			if (coldMastery === null) {
 				return false;
@@ -59,7 +59,7 @@ if (!isIncluded('common/Equip.js')) {
 			);
 			return true;
 		},
-		GetMaxColdMastery: function () {
+		getMaxColdMastery: function () {
 			const [id, subid] = sdk.stats.SkillColdMastery;
 			let i, maxColdMastery = null, loc, item;
 			for (i = 0; i < this.BodyLocs.length; i++) {
@@ -85,7 +85,7 @@ if (!isIncluded('common/Equip.js')) {
 			}
 			return maxColdMastery;
 		},
-		GetMaxLightningMastery: function () {
+		getMaxLightningMastery: function () {
 			const [id, subid] = sdk.stats.SkillLightningMastery;
 			let i, maxLightningMastery = null, loc, item;
 			for (i = 0; i < this.BodyLocs.length; i++) {

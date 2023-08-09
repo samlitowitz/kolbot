@@ -99,6 +99,15 @@ Array.prototype.filterHighDistance = function (step = 0) {
 	return this; // Everything is relatively the same
 };
 
+if (!Array.prototype.distinct) {
+	Array.prototype.distinct = function() {
+		const fnDistinct = function(value, index, array) {
+			return array.indexOf(value) === index;
+		};
+		return this.filter(fnDistinct);
+	};
+}
+
 // https://tc39.github.io/ecma262/#sec-array.prototype.findindex
 if (!Array.prototype.findIndex) {
 	Object.defineProperty(Array.prototype, "findIndex", {

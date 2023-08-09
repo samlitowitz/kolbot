@@ -80,36 +80,38 @@ const Weapons = [
 // TODO: Build auto-equip
 
 (function () {
-	fnPrioritize(MercArmor);
-	fnPrioritize(MercWeapons);
-	fnPrioritize(Armors);
-	fnPrioritize(Heads);
-	fnPrioritize(Shields);
-	fnPrioritize(Weapons);
+	fnPrioritizedRollAndKeep(MercArmor);
+	fnPrioritizedRollAndKeep(MercWeapons);
+	fnPrioritizedRollAndKeep(Armors);
+	fnPrioritizedRollAndKeep(Heads);
+	fnPrioritizedRollAndKeep(Shields);
+	fnPrioritizedRollAndKeep(Weapons);
 })();
 
-let fnPrint = function (name, message) {
-	console.info("[" + name + "]: " + message);
-};
+// if ()
 
-let fnPrioritize = function (options) {
-	let i, opt;
+function fnPrint(name, message) {
+	console.info("[" + name + "]: " + message);
+}
+
+function fnPrioritizedRollAndKeep(options) {
+	let i, opt, optName, fnMissing, fnShouldUpgrade;
 	for (i = 0; i < options.length; i++) {
 		opt = options[i];
 		if (opt === null) {
 			continue;
 		}
+
 		if (typeof opt !== 'object') {
 			continue;
 		}
-		if (!Object.prototype.hasOwnProperty(opt, 'Name')) {
-			continue;
+		optName = '<UNKNOWN>';
+		if (Object.prototype.hasOwnProperty(opt, 'Name')) {
+			optName = opt.Name;
 		}
-		if (!Object.prototype.hasOwnProperty(opt, 'MissingOrShouldUpgrade')) {
-			fnPrint(opt.Name, '`MissingOrShouldUpgrade` not found');
-			continue;
-		}
-		if (!Object.prototype.hasOwnProperty(opt, 'Missing')) {
+		fnMissing = null;
+		if (Object.prototype.hasOwnProperty(opt, 'Missing')) {
+			fnMissing = '';
 			fnPrint(opt.Name, '`Missing` not found');
 			continue;
 		}
@@ -121,18 +123,18 @@ let fnPrioritize = function (options) {
 			fnPrint(opt.Name, '`RollAndKeep` not found');
 			continue;
 		}
-		if (!opt.MissingOrShouldUpgrade()) {
+		if (!opt.missingOrShouldUpgrade()) {
 			fnPrint(opt.Name, 'STOP: not missing and should not be upgraded')
 			return;
 		}
-		if (!opt.Missing() && opt.ShouldUpgrade()) {
+		if (!opt.missing() && opt.shouldUpgrade()) {
 			fnPrint(opt.Name, 'STOP: not missing and should upgrade');
-			opt.RollAndKeep();
+			opt.rollAndKeep();
 			return;
 		}
 		fnPrint(opt.Name, 'roll and keep');
-		opt.RollAndKeep();
+		opt.rollAndKeep();
 	}
-};
+}
 
 

@@ -14,13 +14,13 @@ if (!isIncluded('common/Equip.js')) {
 			sdk.body.Head
 		],
 		Name: 'Tal Rasha\'s Horadric Crest',
-		FarmScripts: function() {
+		farmScripts: function () {
 			return [
 				'Mephisto',
 				'Andariel'
 			];
 		},
-		Missing: function () {
+		missing: function () {
 			let i, loc;
 			for (i = 0; i < this.BodyLocs.length; i++) {
 				loc = this.BodyLocs[i];
@@ -31,17 +31,17 @@ if (!isIncluded('common/Equip.js')) {
 			}
 			return false;
 		},
-		ShouldUpgrade: function () {
-			if (this.Missing()) {
+		shouldUpgrade: function () {
+			if (this.missing()) {
 				return true;
 			}
 			return false;
 		},
-		MissingOrShouldUpgrade: function () {
-			return this.Missing() || this.ShouldUpgrade();
+		missingOrShouldUpgrade: function () {
+			return this.missing() || this.shouldUpgrade();
 		},
-		RollAndKeep: function () {
-			if (!this.MissingOrShouldUpgrade()) {
+		rollAndKeep: function () {
+			if (!this.missingOrShouldUpgrade()) {
 				return false;
 			}
 			Config.KeepRunewords.push(
