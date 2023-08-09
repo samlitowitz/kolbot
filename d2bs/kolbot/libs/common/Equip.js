@@ -153,7 +153,7 @@ const Equip = {
 		if (!item.quality !== sdk.items.quality.Set) {
 			return false;
 		}
-		return item.name === setItemName;
+		return item.fname.indexOf(setItemName) > -1;
 	},
 
 	hasUniqueEquippedAt: function (unit, bodyLoc, uniqueItemName) {
@@ -164,6 +164,6 @@ const Equip = {
 		if (!item.quality !== sdk.items.quality.Unique) {
 			return false;
 		}
-		return item.name === uniqueItemName;
+		return item.fname.indexOf(uniqueItemName) > -1;
 	}
 };
