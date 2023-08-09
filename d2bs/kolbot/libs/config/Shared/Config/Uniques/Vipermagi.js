@@ -44,7 +44,7 @@ if (!isIncluded('common/Equip.js')) {
 				return false;
 			}
 			Config.KeepRunewords.push(
-				"[name] == serpentskinarmor && [quality] == unique # [coldresist] == {1} && [fireresist] == {1} && [lightresist] == {1}".format(allRes)
+				"[name] == serpentskinarmor && [quality] == unique # [coldresist] > {1} && [fireresist] > {1} && [lightresist] > {1}".format(allRes)
 			);
 			return true;
 		},
