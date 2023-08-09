@@ -1134,6 +1134,8 @@ item: {
 			SkillFrenzy: 169,
 			SkillDecrepify: 170,
 			SkillArmorPercent: 171,
+			SkillColdMastery: [107, 65],
+			SkillLightningMastery: [107, 63],
 
 			Strength: 0,
 			Energy: 1,
@@ -1433,6 +1435,7 @@ item: {
 
 			// doesn't exist but define for prototypes
 			AllRes: 555,
+			ItemSingleSkill: 107,
 		},
 
 		// unit info
@@ -1730,7 +1733,7 @@ item: {
 				NextAreaWorldstone: 82,
 			},
 		},
-        
+
 		monsters: {
 			preset: {
 				// Confirmed
@@ -2747,7 +2750,7 @@ item: {
 				Topaz: 101,
 				Skull: 102,
 			},
-			
+
 			// Weapons
 			"HandAxe": 0,
 			"Axe": 1,
@@ -4537,7 +4540,7 @@ item: {
 				TcpIpUnableToConnect: 44,
 			},
 		},
-        
+
 		colors: {
 			White: "ÿc0",
 			Red: "ÿc1",
