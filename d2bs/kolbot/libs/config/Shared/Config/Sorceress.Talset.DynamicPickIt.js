@@ -76,6 +76,9 @@ const Weapons = [
 	SpiritSword
 ];
 
+// TODO: How to integrate FarmScripts
+// TODO: Build auto-equip
+
 (function () {
 	fnPrioritize(MercArmor);
 	fnPrioritize(MercWeapons);
