@@ -43,7 +43,6 @@ function Nihlathak() {
 
 	const recordedData = {
 		timestamp: (new Date()).toISOString(),
-		gid: me.gid,
 		name: me.name,
 		class: sdk.player.class.nameOf(me.classid),
 		level: me.charlvl,
@@ -94,7 +93,7 @@ function Nihlathak() {
 	if (result) {
 		recordedData.killTime = timeInMS;
 	}
-	fnRecordData(data);
+	fnRecordData(recordedData);
 	Pickit.pickItems();
 
 	return true;
