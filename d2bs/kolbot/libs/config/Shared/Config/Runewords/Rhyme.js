@@ -33,14 +33,13 @@ if (!isIncluded('common/Equip.js')) {
 			return this.missing() || this.shouldUpgrade();
 		},
 		rollAndKeep: function () {
-			if (!this.missingOrShouldUpgrade()) {
-				return false;
-			}
-			Config.Recipes.push([Recipe.Socket.Weapon, "kiteshield", Roll.NonEth]);
-			Config.Recipes.push([Recipe.Socket.Weapon, "largeshield", Roll.NonEth]);
-			Config.Recipes.push([Recipe.Socket.Weapon, "smallshield", Roll.NonEth]);
-			Config.KeepRunewords.push("[type] == shield && [class] == normal && [flag] == runeword # [itemcannotbefrozen] > 0 && [coldresist] == 25 && [fireresist] == 25 && [lightresist] == 25");
-			return true;
+			Config.Recipes.push([Recipe.Socket.Weapon, 'kiteshield', Roll.NonEth]);
+			Config.Recipes.push([Recipe.Socket.Weapon, 'largeshield', Roll.NonEth]);
+			Config.Recipes.push([Recipe.Socket.Weapon, 'smallshield', Roll.NonEth]);
+			Config.Runewords.push([Runeword.Rhyme, 'kiteshield', Roll.NonEth]);
+			Config.Runewords.push([Runeword.Rhyme, 'largeshield', Roll.NonEth]);
+			Config.Runewords.push([Runeword.Rhyme, 'smallshield', Roll.NonEth]);
+			Config.KeepRunewords.push('[type] == shield && [class] == normal && [flag] == runeword # [itemcannotbefrozen] > 0 && [coldresist] == 25 && [fireresist] == 25 && [lightresist] == 25');
 		}
 	}
 })(module);

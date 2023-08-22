@@ -23,15 +23,13 @@ if (!isIncluded('common/Equip.js')) {
 			return this.missing() || this.shouldUpgrade();
 		},
 		rollAndKeep: function () {
-			if (!this.missingOrShouldUpgrade()) {
-				return false;
-			}
-
 			Config.Recipes.push([Recipe.Socket.Weapon, 'cap', Roll.NonEth]);
 			Config.Recipes.push([Recipe.Socket.Weapon, 'skullcap', Roll.NonEth]);
 			Config.Recipes.push([Recipe.Socket.Weapon, 'mask', Roll.NonEth]);
+			Config.Runewords.push([Runeword.Lore, 'cap', Roll.NonEth]);
+			Config.Runewords.push([Runeword.Lore, 'skullcap', Roll.NonEth]);
+			Config.Runewords.push([Runeword.Lore, 'mask', Roll.NonEth]);
 			Config.KeepRunewords.push('[type] == helm && [class] == noraml && [flag] == runeword && [flag] != ethereal # [itemallskills] == 1');
-			return true;
 		}
 	};
 })(module);

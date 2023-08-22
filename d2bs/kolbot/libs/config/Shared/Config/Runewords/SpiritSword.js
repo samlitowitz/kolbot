@@ -31,28 +31,16 @@ if (!isIncluded('common/Equip.js')) {
 			return this.missing() || this.shouldUpgrade();
 		},
 		rollAndKeep: function () {
-			const missing = this.missing(),
-				upgrade = this.shouldUpgrade()
-			;
-			if (!missing && !upgrade) {
-				return false;
-			}
-			if (missing) {
-				Config.Recipes.push([Recipe.Socket.Weapon, 'broadsword', Roll.NonEth]);
-				Config.Recipes.push([Recipe.Socket.Weapon, 'crystalsword', Roll.NonEth]);
-				Config.KeepRunewords.push('[type] == sword && [class] == normal && [flag] == runeword # [itemallskills] == 2 && [fcr] >= 25');
-				return true;
-			}
-
-			const minFCR = this.getMinFCR();
+			let minFCR = this.getMinFCR();
 			if (minFCR === null) {
-				return false;
+				minFCR = 25;
 			}
 
 			Config.Recipes.push([Recipe.Socket.Weapon, 'broadsword', Roll.NonEth]);
 			Config.Recipes.push([Recipe.Socket.Weapon, 'crystalsword', Roll.NonEth]);
+			Config.Runewords.push([Runeword.Spirit, 'broadsword', Roll.NonEth]);
+			Config.Runewords.push([Runeword.Spirit, 'crystalsword', Roll.NonEth]);
 			Config.KeepRunewords.push('[type] == sword && [class] == normal && [flag] == runeword # [itemallskills] == 2 && [fcr] > ' + minFCR);
-			return true;
 		},
 		getMinFCR: function () {
 			let i, minFCR = null, loc, item;

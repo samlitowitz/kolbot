@@ -31,23 +31,13 @@ if (!isIncluded('common/Equip.js')) {
 			return this.missing() || this.shouldUpgrade();
 		},
 		rollAndKeep: function () {
-			const missing = this.missing(),
-				upgrade = this.shouldUpgrade()
-			;
-			if (!missing && !upgrade) {
-				return false;
-			}
-			if (missing) {
-				Config.Recipes.push([Recipe.Socket.Weapon, 'polearm', Roll.All]);
-				Config.KeepRunewords.push('[type] == polearm && [flag] == runeword # [meditationaura] >= 12');
-				return true;
-			}
-
 			Config.Recipes.push([Recipe.Socket.Weapon, 'giantthresher', Roll.All]);
 			Config.Recipes.push([Recipe.Socket.Weapon, 'greatpoleaxe', Roll.All]);
 			Config.Recipes.push([Recipe.Socket.Weapon, 'thresher', Roll.All]);
+			Config.Runewords.push([Runeword.Insight, 'giantthresher', Roll.All]);
+			Config.Runewords.push([Runeword.Insight, 'greatpoleaxe', Roll.All]);
+			Config.Runewords.push([Runeword.Insight, 'thresher', Roll.All]);
 			Config.KeepRunewords.push('[type] == polearm && [class] == elite && [flag] == runeword && [flag] == ethereal # [meditationaura] >= 12');
-			return true;
 		}
 	};
 })(module);

@@ -23,13 +23,12 @@ if (!isIncluded('common/Equip.js')) {
 			return this.missing() || this.shouldUpgrade();
 		},
 		rollAndKeep: function () {
-			if (!this.missingOrShouldUpgrade()) {
-				return false;
-			}
-
 			Config.Recipes.push([Recipe.Socket.Weapon, 'archonplate', Roll.Eth]);
 			Config.Recipes.push([Recipe.Socket.Weapon, 'duskshroud', Roll.Eth]);
 			Config.Recipes.push([Recipe.Socket.Weapon, 'greathauberk', Roll.Eth]);
+			Config.Runewords.push([Runeword.Treachery, 'archonplate', Roll.Eth]);
+			Config.Runewords.push([Runeword.Treachery, 'duskshroud', Roll.Eth]);
+			Config.Runewords.push([Runeword.Treachery, 'greathauberk', Roll.Eth]);
 			Config.KeepRunewords.push('[type] == armor && [class] == elite && [flag] == runeword && [flag] == ethereal # [assassinskills] == 2 && [ias] == 45 && [fhr] == 20');
 			return true;
 		}

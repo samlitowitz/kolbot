@@ -33,13 +33,11 @@ if (!isIncluded('common/Equip.js')) {
 			return this.missing() || this.shouldUpgrade();
 		},
 		rollAndKeep: function () {
-			if (!this.missingOrShouldUpgrade()) {
-				return false;
-			}
-			Config.Recipes.push([Recipe.Socket.Weapon, "kiteshield", Roll.NonEth]);
-			Config.Recipes.push([Recipe.Socket.Weapon, "largeshield", Roll.NonEth]);
-			Config.KeepRunewords.push("[type] == shield && [class] == normal && [flag] == runeword # [coldresist] == 43 && [fireresist] == 48 && [lightresist] == 48");
-			return true;
+			Config.Recipes.push([Recipe.Socket.Weapon, 'kiteshield', Roll.NonEth]);
+			Config.Recipes.push([Recipe.Socket.Weapon, 'largeshield', Roll.NonEth]);
+			Config.Runewords.push([Runeword.AncientsPledge, 'kiteshield', Roll.NonEth]);
+			Config.Runewords.push([Runeword.AncientsPledge, 'largeshield', Roll.NonEth]);
+			Config.KeepRunewords.push('[type] == shield && [class] == normal && [flag] == runeword # [coldresist] == 43 && [fireresist] == 48 && [lightresist] == 48');
 		}
 	}
 })(module);
