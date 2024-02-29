@@ -43,34 +43,34 @@ const ClassAttack = {
 
 		let state = (() => {
 			switch (curseID) {
-			case sdk.skills.AmplifyDamage:
-				return sdk.states.AmplifyDamage;
-			case sdk.skills.DimVision:
-				// dim doesn't work on oblivion knights
-				if ([sdk.monsters.OblivionKnight1, sdk.monsters.OblivionKnight2, sdk.monsters.OblivionKnight3].includes(unit.classid)) return false;
-				return sdk.states.DimVision;
-			case sdk.skills.Weaken:
-				return sdk.states.Weaken;
-			case sdk.skills.IronMaiden:
-				return sdk.states.IronMaiden;
-			case sdk.skills.Terror:
-				return unit.scareable ? sdk.states.Terror : false;
-			case sdk.skills.Confuse:
-				// doens't work on specials
-				return unit.scareable ? sdk.states.Confuse : false;
-			case sdk.skills.LifeTap:
-				return sdk.states.LifeTap;
-			case sdk.skills.Attract:
-				// doens't work on specials
-				return unit.scareable ? sdk.states.Attract : false;
-			case sdk.skills.Decrepify:
-				return sdk.states.Decrepify;
-			case sdk.skills.LowerResist:
-				return sdk.states.LowerResist;
-			default:
-				console.warn("(ÿc9canCurse) :: ÿc1Invalid Curse ID: " + curseID);
-				
-				return false;
+				case sdk.skills.AmplifyDamage:
+					return sdk.states.AmplifyDamage;
+				case sdk.skills.DimVision:
+					// dim doesn't work on oblivion knights
+					if ([sdk.monsters.OblivionKnight1, sdk.monsters.OblivionKnight2, sdk.monsters.OblivionKnight3].includes(unit.classid)) return false;
+					return sdk.states.DimVision;
+				case sdk.skills.Weaken:
+					return sdk.states.Weaken;
+				case sdk.skills.IronMaiden:
+					return sdk.states.IronMaiden;
+				case sdk.skills.Terror:
+					return unit.scareable ? sdk.states.Terror : false;
+				case sdk.skills.Confuse:
+					// doens't work on specials
+					return unit.scareable ? sdk.states.Confuse : false;
+				case sdk.skills.LifeTap:
+					return sdk.states.LifeTap;
+				case sdk.skills.Attract:
+					// doens't work on specials
+					return unit.scareable ? sdk.states.Attract : false;
+				case sdk.skills.Decrepify:
+					return sdk.states.Decrepify;
+				case sdk.skills.LowerResist:
+					return sdk.states.LowerResist;
+				default:
+					console.warn("(ÿc9canCurse) :: ÿc1Invalid Curse ID: " + curseID);
+
+					return false;
 			}
 		})();
 
@@ -83,7 +83,7 @@ const ClassAttack = {
 		let curse = Config.CustomCurse
 			.findIndex(function (unitID) {
 				if ((typeof unitID[0] === "number" && unit.classid && unit.classid === unitID[0])
-						|| (typeof unitID[0] === "string" && unit.name && unit.name.toLowerCase() === unitID[0].toLowerCase())) {
+					|| (typeof unitID[0] === "string" && unit.name && unit.name.toLowerCase() === unitID[0].toLowerCase())) {
 					return true;
 				}
 				return false;
@@ -236,7 +236,7 @@ const ClassAttack = {
 
 				Config.ActiveSummon && this.raiseArmy();
 				this.explodeCorpses(unit);
-				let closeMob = Attack.getNearestMonster({skipGid: gid});
+				let closeMob = Attack.getNearestMonster({ skipGid: gid });
 				!!closeMob && this.doCast(closeMob, timedSkill, untimedSkill);
 			}
 
@@ -258,7 +258,7 @@ const ClassAttack = {
 		if (timedSkill < 0 && untimedSkill < 0) return Attack.Result.CANTATTACK;
 		// unit became invalidated
 		if (!unit || !unit.attackable) return Attack.Result.SUCCESS;
-		
+
 		let walk;
 		let classid = unit.classid;
 
@@ -267,45 +267,45 @@ const ClassAttack = {
 
 		if (timedSkill > -1 && (!me.skillDelay || !Skill.isTimed(timedSkill))) {
 			switch (timedSkill) {
-			case sdk.skills.PoisonNova:
-				if (!this.novaTick || getTickCount() - this.novaTick > Config.PoisonNovaDelay * 1000) {
+				case sdk.skills.PoisonNova:
+					if (!this.novaTick || getTickCount() - this.novaTick > Config.PoisonNovaDelay * 1000) {
+						if (unit.distance > Skill.getRange(timedSkill) || checkCollision(me, unit, sdk.collision.Ranged)) {
+							if (!Attack.getIntoPosition(unit, Skill.getRange(timedSkill), sdk.collision.Ranged)) {
+								return Attack.Result.FAILED;
+							}
+						}
+
+						if (!unit.dead && Skill.cast(timedSkill, Skill.getHand(timedSkill), unit)) {
+							this.novaTick = getTickCount();
+						}
+					}
+
+					break;
+				case sdk.skills.Summoner: // Pure Summoner
 					if (unit.distance > Skill.getRange(timedSkill) || checkCollision(me, unit, sdk.collision.Ranged)) {
 						if (!Attack.getIntoPosition(unit, Skill.getRange(timedSkill), sdk.collision.Ranged)) {
 							return Attack.Result.FAILED;
 						}
 					}
 
-					if (!unit.dead && Skill.cast(timedSkill, Skill.getHand(timedSkill), unit)) {
-						this.novaTick = getTickCount();
+					delay(300);
+
+					break;
+				default:
+					if (Skill.getRange(timedSkill) < 4 && !Attack.validSpot(unit.x, unit.y, timedSkill, classid)) return Attack.Result.FAILED;
+
+					if (unit.distance > Skill.getRange(timedSkill) || checkCollision(me, unit, sdk.collision.Ranged)) {
+						// Allow short-distance walking for melee skills
+						let walk = Skill.getRange(timedSkill) < 4 && unit.distance < 10 && !checkCollision(me, unit, sdk.collision.BlockWall);
+
+						if (!Attack.getIntoPosition(unit, Skill.getRange(timedSkill), sdk.collision.Ranged, walk)) {
+							return Attack.Result.FAILED;
+						}
 					}
-				}
 
-				break;
-			case sdk.skills.Summoner: // Pure Summoner
-				if (unit.distance > Skill.getRange(timedSkill) || checkCollision(me, unit, sdk.collision.Ranged)) {
-					if (!Attack.getIntoPosition(unit, Skill.getRange(timedSkill), sdk.collision.Ranged)) {
-						return Attack.Result.FAILED;
-					}
-				}
+					!unit.dead && Skill.cast(timedSkill, Skill.getHand(timedSkill), unit);
 
-				delay(300);
-
-				break;
-			default:
-				if (Skill.getRange(timedSkill) < 4 && !Attack.validSpot(unit.x, unit.y, timedSkill, classid)) return Attack.Result.FAILED;
-
-				if (unit.distance > Skill.getRange(timedSkill) || checkCollision(me, unit, sdk.collision.Ranged)) {
-					// Allow short-distance walking for melee skills
-					let walk = Skill.getRange(timedSkill) < 4 && unit.distance < 10 && !checkCollision(me, unit, sdk.collision.BlockWall);
-
-					if (!Attack.getIntoPosition(unit, Skill.getRange(timedSkill), sdk.collision.Ranged, walk)) {
-						return Attack.Result.FAILED;
-					}
-				}
-
-				!unit.dead && Skill.cast(timedSkill, Skill.getHand(timedSkill), unit);
-
-				break;
+					break;
 			}
 		}
 
@@ -358,24 +358,25 @@ const ClassAttack = {
 				corpse = corpseList.shift();
 
 				// should probably have a way to priortize which ones we summon first
-				if (me.getMinionCount(sdk.summons.type.Revive) < this.maxRevives) {
-					if (this.checkCorpse(corpse, true)) {
-						print("Reviving " + corpse.name);
+				if (
+					me.getMinionCount(sdk.summons.type.Revive) < this.maxRevives
+					&& this.checkCorpse(corpse, true)
+				) {
+					print("Reviving " + corpse.name);
 
-						if (!Skill.cast(sdk.skills.Revive, sdk.skills.hand.Right, corpse)) {
-							return false;
+					if (!Skill.cast(sdk.skills.Revive, sdk.skills.hand.Right, corpse)) {
+						return false;
+					}
+
+					count = me.getMinionCount(sdk.summons.type.Revive);
+					tick = getTickCount();
+
+					while (getTickCount() - tick < 200) {
+						if (me.getMinionCount(sdk.summons.type.Revive) > count) {
+							break;
 						}
 
-						count = me.getMinionCount(sdk.summons.type.Revive);
-						tick = getTickCount();
-
-						while (getTickCount() - tick < 200) {
-							if (me.getMinionCount(sdk.summons.type.Revive) > count) {
-								break;
-							}
-
-							delay(10);
-						}
+						delay(10);
 					}
 				} else if (me.getMinionCount(sdk.summons.type.Skeleton) < this.maxSkeletons) {
 					if (!Skill.cast(sdk.skills.RaiseSkeleton, sdk.skills.hand.Right, corpse)) {
@@ -455,7 +456,10 @@ const ClassAttack = {
 					if (corpseList.length > 0) {
 						corpse = corpseList.shift();
 
-						if (corpse) {
+						if (
+							corpse
+							&& (Config.ReviveSpecific.length == 0 || !Config.ReviveSpecific.includes(corpse.classid))
+						) {
 							me.overhead("Exploding: " + corpse.classid + " " + corpse.name);
 
 							if (Skill.cast(Config.ExplodeCorpses, sdk.skills.hand.Right, corpse)) {
@@ -493,47 +497,29 @@ const ClassAttack = {
 		if (!unit || unit.mode !== sdk.monsters.mode.Dead) return false;
 
 		let baseId = getBaseStat("monstats", unit.classid, "baseid"),
-			monTypeId = getBaseStat("monstats", this.classid, "MonType"),
 			badList = [312, 571];
-		let	states = [
+		let states = [
 			sdk.states.FrozenSolid, sdk.states.Revive, sdk.states.Redeemed,
 			sdk.states.CorpseNoDraw, sdk.states.Shatter, sdk.states.RestInPeace, sdk.states.CorpseNoSelect
 		];
 
 		if (revive && unit.isSpecial) {
+			// me.overhead("Revive: Skip: " + unit.classid);
 			return false;
 		}
 		if (revive && badList.includes(baseId)) {
+			// me.overhead("Revive: Skip: " + unit.classid);
 			return false;
 		}
 		if (revive && Config.ReviveUnstackable && getBaseStat("monstats2", baseId, "sizex") === 3) {
+			// me.overhead("Revive: Skip: " + unit.classid);
 			return false;
 		}
-		let reviveSpecific
-		if (
-			revive
-			&& Config.ReviveSpecific.length > 0 && !Config.ReviveSpecific.includes(baseId)
-			&& Config.ReviveMonTypes.length > 0 && !Config.ReviveMonTypes.includes(monTypeId)
-		) {
+		if (revive && Config.ReviveSpecific.length > 0 && !Config.ReviveSpecific.includes(unit.classid)) {
+			// me.overhead("Revive: Skip: " + unit.classid);
 			return false;
 		}
-		if (
-			revive
-			&& Config.ReviveSpecific.length > 0
-			&& !Config.ReviveSpecific.includes(monTypeId)
-			&& Config.ReviveMonTypes.length == 0
-		) {
-			return false;
-		}
-		if (
-			revive
-			&& Config.ReviveSpecific.length == 0
-			&& Config.ReviveMonTypes.length > 0
-			&& !Config.ReviveMonTypes.includes(monTypeId)
-		) {
-			return false;
-		}
-		
+
 		if (!getBaseStat("monstats2", baseId, revive ? "revive" : "corpseSel")) return false;
 
 		return !!(unit.distance <= 25 && !checkCollision(me, unit, sdk.collision.Ranged) && states.every(state => !unit.getState(state)));
